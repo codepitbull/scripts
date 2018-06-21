@@ -1,0 +1,3 @@
+vagrant/ubuntu/.vagrant
+vagrant/ubuntu/shared/
+vagrant/ubuntu/shared/*.log

@@ -1,0 +1,66 @@
+export ROLLER_BRANCH=roller
+
+ensure_on_roller_branch() {
+   local current_branch_name="$(git rev-parse --abbrev-ref HEAD)"
+   if [ "$ROLLER_BRANCH" = "$current_branch_name" ]; then 
+     return 0
+   else
+     echo "Not on roller branch!"
+     return 1
+   fi
+}
+
+roll_init() {
+    git checkout $ROLLER_BRANCH
+    if [ $? -ne 0 ] ; then git checkout -b $ROLLER_BRANCH; fi
+}
+
+roll_current() {
+    if ! ensure_on_roller_branch ; then return ; fi
+    git log -1 --oneline | awk '{print $2}'
+}
+
+roll_list() {
+    if ! ensure_on_roller_branch ; then return ; fi
+    git log master --oneline --reverse | awk '{print NR-1 " - " $2}'
+}
+
+roll_clean() {
+    git checkout $ROLLER_BRANCH
+    if [ $? -ne 0 ] ; then echo "No $ROLLER_BRANCH-branch found" ; return ; fi
+    git clean -f -d
+    git checkout master
+    git branch -d $ROLLER_BRANCH
+}
+
+roll_to() {
+    if ! ensure_on_roller_branch ; then return ; fi
+    local nr_of_commits=`git log master --pretty=%H | wc -l | awk '{print $1}'`
+    local pos="$(($nr_of_commits-$1))"
+    pos+=p
+    git clean -f -d 
+    git log master --pretty=%H | sed -n $pos | awk '{print $1}' | xargs git reset --hard
+}
+
+roll_next() {
+    if ! ensure_on_roller_branch ; then return ; fi
+    local index_current="$(git log master --pretty=%H | grep -rne `git rev-parse HEAD` 2>/dev/null|awk -F  ":" '/1/ {print $2}')"
+    local pos="$((index_current-1))"
+    pos+=p
+    git clean -f -d 
+    git log master --pretty=%H | sed -n $pos | awk '{print $1}' | xargs git reset --hard
+}
+
+roll_prev() {
+    if ! ensure_on_roller_branch ; then return ; fi
+    local index_current="$(git log master --pretty=%H | grep -rne `git rev-parse HEAD` 2>/dev/null|awk -F  ":" '/1/ {print $2}')"
+    local pos="$((index_current+1))"
+    pos+=p
+    git clean -f -d 
+    git log master --pretty=%H | sed -n $pos | awk '{print $1}' | xargs git reset --hard
+}
+
+roll_start() {
+     if ! ensure_on_roller_branch ; then return ; fi
+     git log master --pretty=%H | tail -n1 | awk '{print $1}' | xargs git reset --hard
+}

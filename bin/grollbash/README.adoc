@@ -1,0 +1,47 @@
+= Git Roll for Bash
+This is a small set of bash-functions inspired by https://github.com/sbt/sbt-groll[sbt-groll].
+
+Its purpose is to allow quick navigation between commits and recreating a clean state.
+My aim was to have groll-funtionality without sbt as I do many trainings using Maven and Gradle.
+
+== Disclaimer
+*This skript uses git reset a lost. I took several precautions to avoid destroying git-repos or other branches.
+This software is provided as is and I don't take any responsibility for things blowing up in your face.*
+
+== Requirements
+- bash / zsh
+- git-installation
+
+== Workflow
+Prepare your commit-history (rebase ftw) to have a series of commits which reflects the different stages you want to show.
+
+e.g.:
+- commit 1: initial setup
+- commit 2: example of REST-API
+- commit 3: Tests for REST-API
+
+...
+
+grollbash will then help you to navigate between these commits, each time clearing everything you edited and having a
+clear workspace after each move.
+
+== Getting the functions into your bash
+ source grollbash.source
+
+After doing so you get the following commands:
+
+* roll_init: Create the branch to work on (called *roller*)
+* roll_clean: delete *roller* branch
+* roll_list: list available commits (the provided index can be used with *roll_to*)
+* roll_current: display what commit we are currently on
+* roll_next: roll to the next commit, discarding all current changes
+* roll_prev: roll to the previous commit, discarding all current changes
+* roll_start: roll to the first commit, discarding all current changes
+* roll_to: roll to the specified commit (index you can get from *roll_list*) discarding all current changes
+
+== How it works
+*grollbash* creates a branch from your *master* and works on that one. The roll_ commands use git-commands under the
+hood to navigate between commits.
+
+
+
