@@ -1,4 +1,5 @@
 whoseport() { lsof -i ":$1" -sTCP:LISTEN }
+
 alias 'timestamp=~/.dotfiles/bin/print_timestamp.sh'
 alias 'v=~/.dotfiles/bin/vagrant_helper.sh'
 alias 'new_maven=~/.dotfiles/bin/new_maven.sh'
