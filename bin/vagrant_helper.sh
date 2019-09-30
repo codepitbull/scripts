@@ -9,5 +9,5 @@ if [ $# -eq 0 ]
     vagrant global-status | grep '.*virtualbox.*' | awk '{print $2" "$1" "$4}'
 else
     VH=$(vagrant global-status | grep ".*$1.*virtualbox.*" | awk '{print $1}')
-    vagrant ssh $VH
+    vagrant ssh-config $VH > ~/.ssh/vagrant-configs/$1.config
 fi

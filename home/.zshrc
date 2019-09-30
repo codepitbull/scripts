@@ -108,7 +108,6 @@ export GOPATH=$HOME/golang
 export GOROOT=/usr/local/opt/go/libexec
 export PATH=$PATH:$GOPATH/bin
 export PATH=$PATH:$GOROOT/bin
-export PATH=$PATH:/Users/jochen/bin/flyway-4.0
 alias mci="jenv exec mvn clean install -T 1C -Dmaven.gitcommitid.skip=true -DskipTests"
 alias ssh="colorssh"
 export PATH="/usr/local/opt/icu4c/bin:$PATH"
