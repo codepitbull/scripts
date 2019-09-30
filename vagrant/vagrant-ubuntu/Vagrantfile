@@ -1,0 +1,11 @@
+Vagrant.configure("2") do |config|
+  config.vm.box = "ubuntu/bionic64"
+  config.vm.synced_folder "shared/", "/shared"
+  config.vm.define "vagrant-ubuntu"
+  config.vm.provision "shell",
+    inline: "touch /home/vagrant/.hushlogin"
+  config.trigger.after :up do |trigger|
+    trigger.name = "Finished Message"
+    trigger.info = "Don't forget to run v vagrant-ubuntu to add it to ssh config!"
+  end
+end
