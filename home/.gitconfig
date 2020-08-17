@@ -6,6 +6,7 @@
 	signingkey = 511AE58F862B3643E4FDD291FAD7EA3C54719615
 [core]
 	excludesfile = /Users/jochen/.gitignore_global
+	hooksPath = /Users/jochen/.dotfiles/git-hooks
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
@@ -18,3 +19,5 @@
     insteadOf = https://github.com/instana/
 [commit]
 	gpgsign = true
+[url "git@github.com:"]
+	insteadOf = https://github.com/

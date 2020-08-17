@@ -1,3 +1,4 @@
+#zmodload zsh/zprof
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
@@ -7,7 +8,9 @@ export ZSH="/Users/jochen/.oh-my-zsh"
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="robbyrussell"
+# ZSH_THEME="robbyrussell"
+
+ZSH_THEME=powerlevel10k/powerlevel10k
 
 # Set list of themes to load
 # Setting this variable when ZSH_THEME=random
@@ -58,9 +61,9 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(
-  git
-)
+#plugins=(
+#  git
+#)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -72,11 +75,11 @@ source $ZSH/oh-my-zsh.sh
 # export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
+if [[ -n $SSH_CONNECTION ]]; then
+  export EDITOR='vim'
+else
+  export EDITOR='mvim'
+fi
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -93,24 +96,36 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-export NVM_DIR="/Users/jochen/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+#export NVM_DIR="/Users/jochen/.nvm"
+#[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+
+export PATH="$HOME/.cargo/bin:/usr/local/bin:$PATH"
 eval "$(jenv init -)"
-export PATH="$HOME/.cargo/bin:$PATH"
 export INSTANA_LDAP_USER=jochen.mader
-bindkey "\e\eOD" backward-word  
-bindkey "\e\eOC" forward-word 
+#bindkey "\e\eOD" backward-word  
+#bindkey "\e\eOC" forward-word 
 source ~/.dotfiles/source_this.sh
-fpath=(~/.zsh/completion $fpath)
-autoload -Uz compinit && compinit -i
 #export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
 export GOPATH=$HOME/golang
 export GOROOT=/usr/local/opt/go/libexec
 export PATH=$PATH:$GOPATH/bin
 export PATH=$PATH:$GOROOT/bin
 alias mci="jenv exec mvn clean install -T 1C -Dmaven.gitcommitid.skip=true -DskipTests"
-alias ssh="colorssh"
+#alias ssh="colorssh"
 export PATH="/usr/local/opt/icu4c/bin:$PATH"
 export PATH="/usr/local/opt/icu4c/sbin:$PATH"
-export PATH="/Users/jochen/bin/google-cloud-sdk/bin:$PATH"
-if [ /usr/local/bin/kubectl ]; then source <(kubectl completion zsh); fi
+#export PATH="/Users/jochen/bin/google-cloud-sdk/bin:$PATH"
+source '/Users/jochen/bin/google-cloud-sdk/path.zsh.inc'
+source '/Users/jochen/bin/google-cloud-sdk/completion.zsh.inc'
+alias hue='ssh -J root@iotgate.mader pi@192.168.3.4'
+alias zwave='ssh -J root@iotgate.mader pi@192.168.3.1'
+alias camera='ssh -L 8089:192.168.3.101:80 root@iotgate.mader'
+export GOPRIVATE=github.com/instana
+export GO111MODULE=on
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+#zprof

@@ -1,0 +1,11 @@
+#!/bin/bash
+
+location=`git config --get remote.origin.url`
+
+if [[ $location == *"github.com:instana"* ]] ; then
+  git config user.email "jochen.mader@instana.com"
+  git config user.name "Jochen Mader"
+else
+  git config user.email "jochen@codepitbull.de" 
+  git config user.name "Jochen Mader"
+fi

@@ -1,6 +1,6 @@
 .DS_Store
 .java-version
-
+.cargo
 **/node_modules/*
 **/template.yaml
 *.log
