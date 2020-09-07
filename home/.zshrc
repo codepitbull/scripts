@@ -78,7 +78,7 @@ source $ZSH/oh-my-zsh.sh
 if [[ -n $SSH_CONNECTION ]]; then
   export EDITOR='vim'
 else
-  export EDITOR='mvim'
+  export EDITOR='vim'
 fi
 
 # Compilation flags
@@ -122,10 +122,15 @@ alias zwave='ssh -J root@iotgate.mader pi@192.168.3.1'
 alias camera='ssh -L 8089:192.168.3.101:80 root@iotgate.mader'
 export GOPRIVATE=github.com/instana
 export GO111MODULE=on
-
+export KUBE_EDITOR="vi" 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
+export HISTIGNORE='yubico-piv-tool*'
 
+export GPG_TTY="$(tty)"
+export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+gpgconf --launch gpg-agent
+gpg-connect-agent updatestartuptty /bye > /dev/null
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 #zprof

@@ -1,4 +1,4 @@
 #!/bin/bash
 artifactId=${PWD##*/}
-cp -R ~/bin/scripts/templates/maven/* ./
+cp -R ~/.dotfiles/bin/templates/maven/* ./
 sed -i '' "s/artifactid/${artifactId}/g" pom.xml
