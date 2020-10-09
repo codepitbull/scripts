@@ -120,6 +120,7 @@ source '/Users/jochen/bin/google-cloud-sdk/completion.zsh.inc'
 alias hue='ssh -J root@iotgate.mader pi@192.168.3.4'
 alias zwave='ssh -J root@iotgate.mader pi@192.168.3.1'
 alias camera='ssh -L 8089:192.168.3.101:80 root@iotgate.mader'
+alias new_java='mkdir -p src/{main,test}/{java,resources}'
 export GOPRIVATE=github.com/instana
 export GO111MODULE=on
 export KUBE_EDITOR="vi" 
@@ -131,6 +132,8 @@ export GPG_TTY="$(tty)"
 export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
 gpgconf --launch gpg-agent
 gpg-connect-agent updatestartuptty /bye > /dev/null
+alias k='kubectl'
+export KUBECONFIG=~/.kube/config:~/.kube/operator-config
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 #zprof

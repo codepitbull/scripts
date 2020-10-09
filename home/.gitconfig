@@ -19,5 +19,6 @@
     insteadOf = https://github.com/instana/
 [commit]
 	gpgsign = true
-[url "git@github.com:"]
-	insteadOf = https://github.com/
+[mergetool "sourcetree"]
+	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
