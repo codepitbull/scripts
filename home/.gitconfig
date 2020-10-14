@@ -5,8 +5,8 @@
 	email = jochen@codepitbull.de
 	signingkey = 511AE58F862B3643E4FDD291FAD7EA3C54719615
 [core]
-	excludesfile = /Users/jochen/.gitignore_global
-	hooksPath = /Users/jochen/.dotfiles/git-hooks
+	excludesFile = ~/.gitignore_global
+	hooksPath = /Users/jochenmader/.dotfiles/git-hooks
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
